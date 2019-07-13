@@ -7,7 +7,7 @@ package database;
 
 /**
 User defined exception, thrown when user already exists,
- @author pradip
+ @author Arko
  */
 public class UserExistsException extends Exception
 {

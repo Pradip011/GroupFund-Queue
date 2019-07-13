@@ -25,7 +25,7 @@ public class DeleteBanker extends InsertBanker
      */
     void deleteBanker(String userId) throws SQLException, UserExistsException
     {
-        String deleteQuery = "DELETE FROM GROUPFUND.BANKER WHERE USERID = '" + userId + "'";
+        String deleteQuery = "DELETE FROM GROUPFUND.BANKER WHERE USERNAME = '" + userId + "'";
         if (!checkUser(userId))
         {
             statement.executeUpdate(deleteQuery);

@@ -25,7 +25,7 @@ public class InsertBanker extends SelectBanker
     */
     public void setData(String accountName, int countryCode, int stateCode, int branchCode, String userId, String password) throws SQLException, UserExistsException
     {
-        String insertQuery = "INSERT INTO BANKER VALUES ('" + accountName + "', " + countryCode + "," + stateCode + "," + branchCode +",'" + userId + "', '" + password + " ' )";
+        String insertQuery = "INSERT INTO GROUPFUND.BANKER VALUES ('" + accountName + "', " + countryCode + "," + stateCode + "," + generateAccountNumber() + ",'" + userId + "', '" + password + "', " + branchCode + ")";
         if (!checkUser(userId))
         {
             throw new UserExistsException("User already exists.");
@@ -40,11 +40,11 @@ public class InsertBanker extends SelectBanker
     private int generateAccountNumber() throws SQLException
     {
         int lastAccountNumber = 0;
-        String searchQuery = "SELECT * FROM BANKER";
+        String searchQuery = "SELECT * FROM GROUPFUND.BANKER";
         resultSet = statement.executeQuery(searchQuery);
         while (resultSet.next())
         {
-            lastAccountNumber = resultSet.getInt("branchCode");
+            lastAccountNumber = resultSet.getInt(4);
         }
         return ++lastAccountNumber;
     }
@@ -53,7 +53,7 @@ public class InsertBanker extends SelectBanker
     */
     protected boolean checkUser(String userId) throws SQLException
     {
-        String searchQuery = "SELECT * FROM BANKER WHERE USERID = '" + userId + "'";
+        String searchQuery = "SELECT * FROM GROUPFUND.BANKER WHERE USERNAME = '" + userId + "'";
         resultSet = statement.executeQuery(searchQuery);
         if (resultSet.next())
         {

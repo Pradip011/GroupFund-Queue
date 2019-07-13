@@ -5,11 +5,7 @@
  */
 package database.customer;
 
-import static java.lang.Class.forName;
-import static java.lang.System.in;
-import static java.lang.System.out;
 import java.sql.*;
-import static java.sql.DriverManager.getConnection;
 import java.util.Scanner;
 
 /**
@@ -37,10 +33,10 @@ public class SelectCustomer
      */
     public SelectCustomer() throws SQLException
     {
-        scanner = new Scanner(in);
-        url = "jdbc:sqlserver://localhost:1433;DatabaseName=GROUPFUND";
-        databaseUserName = "sa";
-        databasePassword = "1234";
+        scanner = new Scanner(System.in);
+        url = "jdbc:derby://localhost:1527/NIITProject";
+        databaseUserName = "GroupFund";
+        databasePassword = "123456789";
         connect();
     }
 
@@ -69,14 +65,13 @@ public class SelectCustomer
     {
         try
         {
-            forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // Connecting to the databse.
-            connection = getConnection(url, databaseUserName, databasePassword);
+            connection = DriverManager.getConnection(url, databaseUserName, databasePassword);
             // On connection -> preparing the statement to execute the queries.
             statement = connection.createStatement();
         } catch (Exception e)
         {
-            out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
     }
 
@@ -108,7 +103,7 @@ public class SelectCustomer
             }
         } catch (Exception e)
         {
-            out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
         if (name != null && secretWord != null)
         {
@@ -140,10 +135,10 @@ public class SelectCustomer
             {
                 cash = resultSet.getInt(2);
             }
-            out.println("Cash: " + cash);
+            System.out.println("Cash: " + cash);
         } catch (Exception e)
         {
-            out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
         return cash;
     }
@@ -169,7 +164,7 @@ public class SelectCustomer
             }
         } catch (Exception e)
         {
-            out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
         
         return name;

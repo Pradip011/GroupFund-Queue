@@ -6,7 +6,6 @@
 package database.banker;
 
 import database.customer.SelectCustomer;
-import static java.lang.System.out;
 import java.sql.SQLException;
 
 /**
@@ -38,7 +37,7 @@ public class SelectBanker extends SelectCustomer
         try
         {
             // Construct the query.
-            String searchQuery = "SELECT * FROM GROUPFUND.BANKER WHERE USERID='" + userId + "'";
+            String searchQuery = "SELECT * FROM GROUPFUND.BANKER WHERE USERNAME='" + userId + "'";
             // Execute the query.
             resultSet = statement.executeQuery(searchQuery);
             while (resultSet.next())
@@ -48,7 +47,7 @@ public class SelectBanker extends SelectCustomer
             }
         } catch (Exception e)
         {
-            out.println("Exception: " + e.getMessage());
+            System.out.println("Exception: " + e.getMessage());
         }
         if (name != null && secretWord != null)
         {
@@ -73,7 +72,7 @@ public class SelectBanker extends SelectCustomer
     {
         StringBuilder stringBuilder = new StringBuilder();
         // Construct the query.
-        String searchQuery = "SELECT * FROM GROUPFUND.BANKER WHERE USERID= '" + userId + "'";
+        String searchQuery = "SELECT * FROM GROUPFUND.BANKER WHERE USERNAME= '" + userId + "'";
         // Execute the query.
         resultSet = statement.executeQuery(searchQuery);
         // Store the result.
